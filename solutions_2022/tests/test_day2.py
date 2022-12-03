@@ -1,3 +1,5 @@
+import day2
+from shared_functions import get_lines
 import os
 from pathlib import Path
 import sys
@@ -6,9 +8,6 @@ path = Path(os.path.abspath(__file__))
 solutions_path = os.path.join(path.parent.absolute().parent.absolute(),
                               'solutions')
 sys.path.insert(0, solutions_path)
-
-from shared_functions import get_lines
-import day2
 
 
 @pytest.fixture
@@ -36,4 +35,4 @@ def test_interpret_half_bad_line():
 
 def test_calculate_score():
     play = ("Rock", "Paper")
-    assert day2.calculate_score(play) == 8
+    assert day2.calculate_play_score(play) == 8

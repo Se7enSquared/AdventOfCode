@@ -66,7 +66,7 @@ def get_letters(line: List[str]) -> Tuple[str]:
     return play_list[0], play_list[1]
 
 
-def calculate_score(play: Tuple[str]) -> None:
+def calculate_play_score(play: Tuple[str]) -> None:
     player_play = play[1]
     choice_score = SCORES[player_play]
     draw = play[0] == play[1]
@@ -101,7 +101,7 @@ def calculate_player_play(line: str) -> Tuple[str]:
 
 def calculate_final_score(play: Tuple[str], game_score: int) -> int:
     draw = play[0] == play[1]
-    play_score = calculate_score(play)
+    play_score = calculate_play_score(play)
     game_score += play_score
     if play in WIN_CONDITIONS:
         print(f'{play[1]} beats {play[0]} you won... adding {play_score}'
