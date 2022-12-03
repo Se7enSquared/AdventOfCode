@@ -64,7 +64,7 @@ def interpret_line(line: str) -> Tuple[str]:
     return (opponent_play, player_play)
 
 
-def get_letters(line: List[str]):
+def get_letters(line: List[str]) -> Tuple[str]:
     play_list = line.rstrip('\n').split(" ")
     return play_list[0], play_list[1]
 
@@ -117,16 +117,18 @@ def calculate_final_score(play: Tuple[str], game_score: int) -> int:
     return game_score
 
 
-def part_1():
+def part_1() -> None:
+    print('==================== PART 1 ====================\n')
     lines = get_lines(INPUT_FILE_PATH)
     game_score = 0
     for line in lines:
         play = interpret_line(line)
         game_score = calculate_final_score(play, game_score)
-    print(f'Game over! Final score: {game_score}')
+    print(f'Game over! Final score: {game_score}\n\n')
 
 
-def part_2():
+def part_2() -> None:
+    print('==================== PART 1 ====================\n')
     lines = get_lines(INPUT_FILE_PATH)
     game_score = 0
     for line in lines:
