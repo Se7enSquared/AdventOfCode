@@ -8,13 +8,10 @@ PARENT_PATH = Path(os.path.abspath(__file__)
                    ).parent.absolute().parent.absolute()
 INPUT_FILE_PATH = os.path.join(PARENT_PATH, 'input_files/day2_input.txt')
 
-OPPONENT_DECODER = {
+PLAY_DECODER = {
     "A": "Rock",
     "B": "Paper",
-    "C": "Scissors"
-}
-
-PLAYER_DECODER = {
+    "C": "Scissors",
     "X": "Rock",
     "Y": "Paper",
     "Z": "Scissors"
@@ -57,8 +54,8 @@ NEEDED_LOSE_MOVE = {
 def interpret_line(line: str) -> Tuple[str]:
     opponent_letter, player_letter = get_letters(line)
     try:
-        opponent_play = OPPONENT_DECODER[opponent_letter]
-        player_play = PLAYER_DECODER[player_letter]
+        opponent_play = PLAY_DECODER[opponent_letter]
+        player_play = PLAY_DECODER[player_letter]
     except KeyError:
         raise ValueError('invalid move')
     return (opponent_play, player_play)
@@ -84,7 +81,7 @@ def calculate_score(play: Tuple[str]) -> None:
 def interpret_line_for_part_2(line: str) -> Tuple[str]:
     opponent_letter, target_outcome = get_letters(line)
     try:
-        opponent_play = OPPONENT_DECODER[opponent_letter]
+        opponent_play = PLAY_DECODER[opponent_letter]
         outcome = OUTCOMES[target_outcome]
     except KeyError:
         raise ValueError('invalid move')
