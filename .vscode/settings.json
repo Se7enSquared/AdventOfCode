@@ -3,5 +3,9 @@
         "solutions_2022"
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "python.analysis.extraPaths": [
+        "c:\\Users\\Heather\\.vscode\\extensions\\fxtd-odyssey.mayapy-1.0.4\\mayaSDK",
+        "./solutions_2022/solutions"
+    ]
 }

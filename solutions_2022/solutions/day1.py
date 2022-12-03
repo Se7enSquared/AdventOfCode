@@ -2,11 +2,11 @@ from pathlib import Path
 import os
 from typing import List
 
-from solutions_2022.shared_functions import get_lines
+from shared_functions import get_lines
 
 path = Path(os.path.abspath(__file__))
-parent_path = path.parent.absolute()
-INPUT_FILE_PATH = os.path.join(parent_path, 'day1_input.txt')
+parent_path = path.parent.absolute().parent.absolute()
+INPUT_FILE_PATH = os.path.join(parent_path, 'input_files/day1_input.txt')
 
 
 def get_top_3(calories: str) -> List[int]:
