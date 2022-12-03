@@ -8,19 +8,19 @@ PARENT_PATH = Path(os.path.abspath(__file__)
                    ).parent.absolute().parent.absolute()
 INPUT_FILE_PATH = os.path.join(PARENT_PATH, 'input_files/day2_input.txt')
 
-OPPONENT_DICT = {
+OPPONENT_DECODER = {
     "A": "Rock",
     "B": "Paper",
     "C": "Scissors"
 }
 
-PLAYER_DICT = {
+PLAYER_DECODER = {
     "X": "Rock",
     "Y": "Paper",
     "Z": "Scissors"
 }
 
-SCORE_DICT = {
+SCORES = {
     "Rock": 1,
     "Paper": 2,
     "Scissors": 3,
@@ -35,7 +35,7 @@ WIN_CONDITIONS = [
     ("Paper", "Scissors")
 ]
 
-OUTCOME_DICT = {
+OUTCOMES = {
     "X": "Lose",
     "Y": "Draw",
     "Z": "Win"
@@ -57,8 +57,8 @@ NEEDED_LOSE_MOVE = {
 def interpret_line(line: str) -> Tuple[str]:
     opponent_letter, player_letter = get_letters(line)
     try:
-        opponent_play = OPPONENT_DICT[opponent_letter]
-        player_play = PLAYER_DICT[player_letter]
+        opponent_play = OPPONENT_DECODER[opponent_letter]
+        player_play = PLAYER_DECODER[player_letter]
     except KeyError:
         raise ValueError('invalid move')
     return (opponent_play, player_play)
@@ -71,21 +71,21 @@ def get_letters(line: List[str]) -> Tuple[str]:
 
 def calculate_score(play: Tuple[str]) -> None:
     player_play = play[1]
-    choice_score = SCORE_DICT[player_play]
+    choice_score = SCORES[player_play]
     draw = play[0] == play[1]
     if play in WIN_CONDITIONS:
-        return SCORE_DICT['Win'] + choice_score
+        return SCORES['Win'] + choice_score
     elif draw:
-        return + SCORE_DICT['Draw'] + choice_score
+        return + SCORES['Draw'] + choice_score
     else:
-        return SCORE_DICT['Lose'] + choice_score
+        return SCORES['Lose'] + choice_score
 
 
 def interpret_line_for_part_2(line: str) -> Tuple[str]:
     opponent_letter, target_outcome = get_letters(line)
     try:
-        opponent_play = OPPONENT_DICT[opponent_letter]
-        outcome = OUTCOME_DICT[target_outcome]
+        opponent_play = OPPONENT_DECODER[opponent_letter]
+        outcome = OUTCOMES[target_outcome]
     except KeyError:
         raise ValueError('invalid move')
     return opponent_play, outcome
