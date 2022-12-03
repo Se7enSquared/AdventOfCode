@@ -1,0 +1,7 @@
+{
+    "python.testing.pytestArgs": [
+        "solutions_2022"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}
