@@ -128,7 +128,7 @@ def part_1() -> None:
 
 
 def part_2() -> None:
-    print('==================== PART 1 ====================\n')
+    print('==================== PART 2 ====================\n')
     lines = get_lines(INPUT_FILE_PATH)
     game_score = 0
     for line in lines:
