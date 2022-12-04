@@ -51,14 +51,14 @@ NEEDED_LOSE_MOVE = {
 }
 
 
-def interpret_line(line: str) -> Tuple[str]:
-    opponent_letter, player_letter = get_letters(line)
+def interpret_line(line: str, part=1) -> Tuple[str]:
+    first_letter, second_letter = get_letters(line)
     try:
-        opponent_play = PLAY_DECODER[opponent_letter]
-        player_play = PLAY_DECODER[player_letter]
+        first_item = PLAY_DECODER[first_letter]
+        second_item = PLAY_DECODER[second_letter] if part == 1 else OUTCOMES[second_letter]
     except KeyError:
         raise ValueError('invalid move')
-    return (opponent_play, player_play)
+    return (first_item, second_item)
 
 
 def get_letters(line: List[str]) -> Tuple[str]:
@@ -78,18 +78,8 @@ def calculate_play_score(play: Tuple[str]) -> None:
         return SCORES['Lose'] + choice_score
 
 
-def interpret_line_for_part_2(line: str) -> Tuple[str]:
-    opponent_letter, target_outcome = get_letters(line)
-    try:
-        opponent_play = PLAY_DECODER[opponent_letter]
-        outcome = OUTCOMES[target_outcome]
-    except KeyError:
-        raise ValueError('invalid move')
-    return opponent_play, outcome
-
-
 def calculate_player_play(line: str) -> Tuple[str]:
-    opponent_play, outcome = interpret_line_for_part_2(line)
+    opponent_play, outcome = interpret_line(line, part=2)
     if outcome == 'Win':
         player_play = NEEDED_WIN_MOVE[opponent_play]
     elif outcome == 'Lose':
