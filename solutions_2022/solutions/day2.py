@@ -114,18 +114,8 @@ def calculate_final_score(play: Tuple[str], game_score: int) -> int:
     return game_score
 
 
-def part_1() -> None:
-    print('==================== PART 1 ====================\n')
-    lines = get_lines(INPUT_FILE_PATH)
-    game_score = 0
-    for line in lines:
-        play = interpret_line(line)
-        game_score = calculate_final_score(play, game_score)
-    print(f'Game over! Final score: {game_score}\n\n')
-
-
-def part_2() -> None:
-    print('==================== PART 2 ====================\n')
+def execute(part: str) -> None:
+    print(f'==================== {part} ====================\n')
     lines = get_lines(INPUT_FILE_PATH)
     game_score = 0
     for line in lines:
@@ -135,5 +125,5 @@ def part_2() -> None:
 
 
 if __name__ == '__main__':
-    part_1()
-    part_2()
+    for part in ('PART 1', 'PART 2'):
+        execute(part)
