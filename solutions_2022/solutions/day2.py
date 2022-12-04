@@ -1,12 +1,14 @@
+#https://adventofcode.com/2022/day/2
+
 from pathlib import Path
 import os
 from typing import List, Tuple
 
 from shared_functions import get_lines
 
-PARENT_PATH = Path(os.path.abspath(__file__)
-                   ).parent.absolute().parent.absolute()
-INPUT_FILE_PATH = os.path.join(PARENT_PATH, 'input_files/day2_input.txt')
+PATH = Path(os.path.abspath(__file__))
+PARENT_PATH = PATH.parent.absolute().parent.absolute()
+INPUT_FILE_PATH = os.path.join(PARENT_PATH,  'input_files/day2_input.txt')
 
 PLAY_DECODER = {
     "A": "Rock",
