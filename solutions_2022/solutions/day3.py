@@ -37,7 +37,7 @@ def find_common_item(first: str, second:str, third=None) -> List[str]:
     return list(in_common)[0]
 
 
-def grouper(iterable, n, fillvalue=None):
+def grouper(iterable: iter, n: int, fillvalue: str=None) -> Dict:
     args = [iter(iterable)] * n
     return zip_longest(*args, fillvalue=fillvalue)
 
