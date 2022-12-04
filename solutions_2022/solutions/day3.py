@@ -4,6 +4,8 @@ from pathlib import Path
 import os
 from typing import Dict, List, Tuple
 from string import ascii_lowercase, ascii_uppercase
+from itertools import islice, zip_longest
+
 
 from shared_functions import get_lines
 
@@ -25,8 +27,20 @@ def compartmentalize(rucksack_contents: str) -> Tuple[str]:
     return first_compartment, second_compartment
 
 
-def find_common_item(first: str, second:str) -> List[str]:
-    return list(set(first).intersection(second))[0]
+def find_common_item(first: str, second:str, third=None) -> List[str]:
+    s1 = set(first)
+    s2 = set(second)
+    in_common = s1.intersection(s2)
+    if third:
+        s3 = set(third)
+        in_common = in_common.intersection(s3)
+    return list(in_common)[0]
+
+
+def grouper(iterable, n, fillvalue=None):
+    args = [iter(iterable)] * n
+    return zip_longest(*args, fillvalue=fillvalue)
+
 
 if __name__ == '__main__':
     global LOWER_DICT
@@ -36,11 +50,23 @@ if __name__ == '__main__':
     UPPER_DICT = generate_priority_dicts('upper', range(27, 53))
 
     priority_sum = 0
+    lines = get_lines(INPUT_FILE_PATH)
 
-    for line in get_lines(INPUT_FILE_PATH):
+    for line in lines:
         first, second = compartmentalize(line)
         common_item = find_common_item(first, second)
         priority_sum += LOWER_DICT.get(common_item) or UPPER_DICT.get(common_item)
+
+    badge_sum = 0
+    for line_group in grouper(lines, 3, '\n'):
+        first, second, third = line_group
+        first = first.strip()
+        second = second.strip()
+        third = third.strip()
+        common_item = find_common_item(first, second, third)
+        badge_sum += LOWER_DICT.get(common_item) or UPPER_DICT.get(common_item)
+
     print(priority_sum)
+    print(badge_sum)
 
 
