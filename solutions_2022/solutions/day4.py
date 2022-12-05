@@ -9,15 +9,15 @@ from shared_functions import get_lines
 
 PATH = Path(os.path.abspath(__file__))
 PARENT_PATH = PATH.parent.absolute().parent.absolute()
-INPUT_FILE_PATH = os.path.join(PARENT_PATH, 'input_files/day4_input.txt')
+INPUT_FILE_PATH = os.path.join(PARENT_PATH, "input_files/day4_input.txt")
 
 
 def _create_int_pair(pair) -> Tuple:
-    return tuple(int(x) for x in pair.split('-'))
+    return tuple(int(x) for x in pair.split("-"))
 
 
 def get_pairs(line: str) -> Tuple:
-    pairs = line.split(',')
+    pairs = line.split(",")
     pair_list = [_create_int_pair(item) for item in pairs]
     return tuple(pair_list)
 
@@ -51,12 +51,11 @@ def get_overlapping_pair_count(lines: List[str]) -> int:
     overlapping = 0
     for line in lines:
         pairs = get_pairs(line.rstrip())
-        overlapping+= do_overlap(pairs)
+        overlapping += do_overlap(pairs)
     return overlapping
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     lines = get_lines(INPUT_FILE_PATH)
-    print(get_contained_pair_count(lines))
-    print(get_overlapping_pair_count(lines))
-
+    print(f'Day 4, Part 1: {get_contained_pair_count(lines)}')
+    print(f'Day 4, Part 2: {get_overlapping_pair_count(lines)}')
