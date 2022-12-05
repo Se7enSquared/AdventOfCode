@@ -12,11 +12,11 @@ PARENT_PATH = PATH.parent.absolute().parent.absolute()
 INPUT_FILE_PATH = os.path.join(PARENT_PATH, 'input_files/day4_input.txt')
 
 
-def _create_int_pair(pair):
+def _create_int_pair(pair) -> Tuple:
     return tuple(int(x) for x in pair.split('-'))
 
 
-def get_pairs(line: str):
+def get_pairs(line: str) -> Tuple:
     pairs = line.split(',')
     pair_list = [_create_int_pair(item) for item in pairs]
     return tuple(pair_list)
@@ -39,17 +39,24 @@ def do_overlap(pairs: Tuple[Tuple[str]]) -> int:
     return 0
 
 
-if __name__ == '__main__':
-    lines = get_lines(INPUT_FILE_PATH)
+def get_contained_pair_count(lines: List[str]) -> int:
     contained = 0
-
     for line in lines:
         pairs = get_pairs(line.rstrip())
         contained += process_pairs(pairs)
-    print(contained)
+    return contained
 
+
+def get_overlapping_pair_count(lines: List[str]) -> int:
     overlapping = 0
     for line in lines:
         pairs = get_pairs(line.rstrip())
         overlapping+= do_overlap(pairs)
-    print(overlapping)
+    return overlapping
+
+
+if __name__ == '__main__':
+    lines = get_lines(INPUT_FILE_PATH)
+    print(get_contained_pair_count(lines))
+    print(get_overlapping_pair_count(lines))
+
