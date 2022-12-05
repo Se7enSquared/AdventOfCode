@@ -22,14 +22,14 @@ def get_pairs(line: str) -> Tuple:
     return tuple(pair_list)
 
 
-def process_pairs(pairs: Tuple[Tuple[str]]) -> int:
+def find_encompassing(pairs: Tuple[Tuple[str]]) -> int:
     section1, section2 = pairs
     first_fits_in_second = section1[0] >= section2[0] and section1[1] <= section2[1]
     second_fits_in_first = section2[0] >= section1[0] and section2[1] <= section1[1]
     return 1 if first_fits_in_second or second_fits_in_first else 0
 
 
-def do_overlap(pairs: Tuple[Tuple[str]]) -> int:
+def find_overlap(pairs: Tuple[Tuple[str]]) -> int:
     section1, section2 = pairs
     overlaps_number = section1[0] == section2[0] or section1[1] == section2[1]
     number_1_1_fits_in_range = section1[0] in range(section2[0], section2[1] + 1)
@@ -43,7 +43,7 @@ def get_contained_pair_count(lines: List[str]) -> int:
     contained = 0
     for line in lines:
         pairs = get_pairs(line.rstrip())
-        contained += process_pairs(pairs)
+        contained += find_encompassing(pairs)
     return contained
 
 
@@ -51,7 +51,7 @@ def get_overlapping_pair_count(lines: List[str]) -> int:
     overlapping = 0
     for line in lines:
         pairs = get_pairs(line.rstrip())
-        overlapping += do_overlap(pairs)
+        overlapping += find_overlap(pairs)
     return overlapping
 
 
