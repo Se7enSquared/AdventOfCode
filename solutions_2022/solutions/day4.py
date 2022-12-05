@@ -13,16 +13,19 @@ INPUT_FILE_PATH = os.path.join(PARENT_PATH, "input_files/day4_input.txt")
 
 
 def _create_int_pair(pair) -> Tuple:
+    """ given a pair from the input file, convert to a tuple of ints """
     return tuple(int(x) for x in pair.split("-"))
 
 
 def get_pairs(line: str) -> Tuple:
+    """ format pairs as a set of tuples containing ints """
     pairs = line.split(",")
     pair_list = [_create_int_pair(item) for item in pairs]
     return tuple(pair_list)
 
 
 def find_encompassing(pairs: Tuple[Tuple[str]]) -> int:
+    """ find instances of one pair's range emcompassing the other """
     section1, section2 = pairs
     first_fits_in_second = section1[0] >= section2[0] and section1[1] <= section2[1]
     second_fits_in_first = section2[0] >= section1[0] and section2[1] <= section1[1]
@@ -30,6 +33,7 @@ def find_encompassing(pairs: Tuple[Tuple[str]]) -> int:
 
 
 def find_overlap(pairs: Tuple[Tuple[str]]) -> int:
+    """ find any overlapping sections of either pair """
     section1, section2 = pairs
     overlaps_number = section1[0] == section2[0] or section1[1] == section2[1]
     number_1_1_fits_in_range = section1[0] in range(section2[0], section2[1] + 1)
@@ -39,7 +43,8 @@ def find_overlap(pairs: Tuple[Tuple[str]]) -> int:
     return 0
 
 
-def get_contained_pair_count(lines: List[str]) -> int:
+def get_encompassing_pair_count(lines: List[str]) -> int:
+    """ sum encompassing pairs for part 1 """
     contained = 0
     for line in lines:
         pairs = get_pairs(line.rstrip())
@@ -48,6 +53,7 @@ def get_contained_pair_count(lines: List[str]) -> int:
 
 
 def get_overlapping_pair_count(lines: List[str]) -> int:
+    """ sum overlaps for part 2 """
     overlapping = 0
     for line in lines:
         pairs = get_pairs(line.rstrip())
@@ -57,5 +63,5 @@ def get_overlapping_pair_count(lines: List[str]) -> int:
 
 if __name__ == "__main__":
     lines = get_lines(INPUT_FILE_PATH)
-    print(f'Day 4, Part 1: {get_contained_pair_count(lines)}')
+    print(f'Day 4, Part 1: {get_encompassing_pair_count(lines)}')
     print(f'Day 4, Part 2: {get_overlapping_pair_count(lines)}')
