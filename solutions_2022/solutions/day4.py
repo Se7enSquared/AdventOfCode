@@ -22,17 +22,34 @@ def get_pairs(line: str):
     return tuple(pair_list)
 
 
-def process_pair(pairs: Tuple[Tuple[str]]):
+def process_pairs(pairs: Tuple[Tuple[str]]) -> int:
     section1, section2 = pairs
     first_fits_in_second = section1[0] >= section2[0] and section1[1] <= section2[1]
     second_fits_in_first = section2[0] >= section1[0] and section2[1] <= section1[1]
     return 1 if first_fits_in_second or second_fits_in_first else 0
 
 
+def do_overlap(pairs: Tuple[Tuple[str]]) -> int:
+    section1, section2 = pairs
+    overlaps_number = section1[0] == section2[0] or section1[1] == section2[1]
+    number_1_1_fits_in_range = section1[0] in range(section2[0], section2[1] + 1)
+    number_2_1_fits_in_range = section2[0] in range(section1[0], section1[1] + 1)
+    if overlaps_number or number_1_1_fits_in_range or number_2_1_fits_in_range:
+        return 1
+    return 0
+
+
 if __name__ == '__main__':
     lines = get_lines(INPUT_FILE_PATH)
-    overlaps = 0
+    contained = 0
+
     for line in lines:
         pairs = get_pairs(line.rstrip())
-        overlaps += process_pair(pairs)
-    print(overlaps)
+        contained += process_pairs(pairs)
+    print(contained)
+
+    overlapping = 0
+    for line in lines:
+        pairs = get_pairs(line.rstrip())
+        overlapping+= do_overlap(pairs)
+    print(overlapping)
