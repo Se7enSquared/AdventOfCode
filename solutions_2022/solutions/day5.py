@@ -48,8 +48,7 @@ def parse_instructions(instruction_line: str) -> namedtuple:
 
 
 def follow_instruction(
-    stack: List[List[str]], instruction: namedtuple, part: int
-) -> List[List[str]]:
+    stack: List[List[str]], instruction: namedtuple, part: int) -> List[List[str]]:
     """perform the actions in the instruction object"""
     items = stack[instruction.move_from][-instruction.qty :]
     if part == 1:
@@ -61,6 +60,7 @@ def follow_instruction(
 
 
 def execute_part(part: int, stack: List[List[str]]):
+    """ execute based on day 5 part 1 or 2 """
     for line in instruction_lines:
         instruction_line = line.split()
         instruction = parse_instructions(instruction_line)
