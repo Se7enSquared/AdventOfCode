@@ -48,10 +48,10 @@ def parse_instructions(instruction_line: str) -> namedtuple:
     return Instruction(quantity, move_from, move_to)
 
 
-def follow_instruction(stack: List[List[str]], instruction: namedtuple, part1: bool = True) -> List[List[str]]:
+def follow_instruction(stack: List[List[str]], instruction: namedtuple, part: int) -> List[List[str]]:
     """ perform the actions in the instruction object """
     items = stack[instruction.move_from][-instruction.qty:]
-    if part1:
+    if part == 1:
         items.reverse()
     new_list = stack[instruction.move_from][:-instruction.qty]
     stack[instruction.move_from] = new_list
@@ -59,22 +59,19 @@ def follow_instruction(stack: List[List[str]], instruction: namedtuple, part1: b
     return stack
 
 
+def execute_part(part: int, stack: List[List[str]]):
+    for line in instruction_lines:
+        instruction_line = line.split()
+        instruction = parse_instructions(instruction_line)
+        new_stack = follow_instruction(stack, instruction, part)
+    final_string = ''.join(i[-1] for i in stack)
+    print(final_string)
+
 if __name__ == '__main__':
     all_input = get_lines(INPUT_FILE_PATH)
     stacks = all_input[:8]
-    new_stack = cleanup_stacks(stacks)
     instruction_lines = all_input[10:]
-    for line in instruction_lines:
-        instruction_line = line.split()
-        instruction = parse_instructions(instruction_line)
-        new_stack = follow_instruction(new_stack, instruction)
-    final_string = ''.join(i[-1] for i in new_stack)
-    print(final_string)
 
-    new_stack = cleanup_stacks(stacks)
-    for line in instruction_lines:
-        instruction_line = line.split()
-        instruction = parse_instructions(instruction_line)
-        new_stack = follow_instruction(new_stack, instruction, part1=False)
-    final_string = ''.join(i[-1] for i in new_stack)
-    print(final_string)
+    for part in (1, 2):
+        new_stack = cleanup_stacks(stacks)
+        execute_part(part, new_stack)
