@@ -27,13 +27,12 @@ def cleanup_stacks(stack_input: List[List[str]]) -> List[List[str]]:
 def clean_list_items(transposed_stack: List[List[str]]) -> List[List[str]]:
     """remove extraneous characters from list items"""
     outer_list = []
+    chars_to_replace = ['[', ']', ' ', '\n']
     for l in transposed_stack:
         clean_letters = []
         for i in l:
-            i = i.replace("[", "")
-            i = i.replace("]", "")
-            i = i.replace("\n", "")
-            i = i.replace(" ", "")
+            for char in chars_to_replace:
+                i = i.replace(char, "")
             clean_letters.append(i)
         outer_list.append(clean_letters)
     return [[x for x in lst if x] for lst in outer_list]
