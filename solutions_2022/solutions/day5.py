@@ -13,6 +13,7 @@ PARENT_PATH = PATH.parent.absolute().parent.absolute()
 INPUT_FILE_PATH = os.path.join(PARENT_PATH, "input_files/day5_input.txt")
 
 CRATE_SIZE = 4
+OFFSET = 1
 
 
 def cleanup_stacks(stack_input: List[List[str]]) -> List[List[str]]:
@@ -44,8 +45,8 @@ def parse_instructions(instruction_line: str) -> namedtuple:
     """build a namedtuple of instructions"""
     Instruction = namedtuple("Instruction", "qty move_from move_to")
     quantity = int(instruction_line[1])
-    move_from = int(instruction_line[3]) - 1
-    move_to = int(instruction_line[-1]) - 1
+    move_from = int(instruction_line[3]) - OFFSET
+    move_to = int(instruction_line[-1]) - OFFSET
     return Instruction(quantity, move_from, move_to)
 
 
