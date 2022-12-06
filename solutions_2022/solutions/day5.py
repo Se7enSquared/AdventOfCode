@@ -34,7 +34,6 @@ def clean_list_items(transposed_stack):
             i = i.replace(']', '')
             i = i.replace('\n', '')
             i = i.replace(' ', '')
-            print(f'i end: {i}')
             clean_letters.append(i)
         outer_list.append(clean_letters)
     return [[x for x in lst if x] for lst in outer_list]
@@ -49,10 +48,11 @@ def parse_instructions(instruction_line):
     return Instruction(quantity, move_from, move_to)
 
 
-def follow_instruction(stack: List[List[str]], instruction: namedtuple):
+def follow_instruction(stack: List[List[str]], instruction: namedtuple, part1=True):
     """ perform the actions in the instruction object """
     items = stack[instruction.move_from][-instruction.qty:]
-    items.reverse()
+    if part1:
+        items.reverse()
     new_list = stack[instruction.move_from][:-instruction.qty]
     stack[instruction.move_from] = new_list
     stack[instruction.move_to].extend(items)
@@ -68,5 +68,13 @@ if __name__ == '__main__':
         instruction_line = line.split()
         instruction = parse_instructions(instruction_line)
         new_stack = follow_instruction(new_stack, instruction)
+    final_string = ''.join(i[-1] for i in new_stack)
+    print(final_string)
+
+    new_stack = cleanup_stacks(stacks)
+    for line in instruction_lines:
+        instruction_line = line.split()
+        instruction = parse_instructions(instruction_line)
+        new_stack = follow_instruction(new_stack, instruction, part1=False)
     final_string = ''.join(i[-1] for i in new_stack)
     print(final_string)
