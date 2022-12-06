@@ -1,5 +1,3 @@
-# https://adventofcode.com/2022/day/3
-
 from collections import namedtuple
 from itertools import zip_longest
 from pathlib import Path
@@ -8,9 +6,11 @@ from typing import List
 
 from shared_functions import get_lines
 
+DAY = 5
+PARTS = (1, 2)
 PATH = Path(os.path.abspath(__file__))
 PARENT_PATH = PATH.parent.absolute().parent.absolute()
-INPUT_FILE_PATH = os.path.join(PARENT_PATH, "input_files/day5_input.txt")
+INPUT_FILE_PATH = os.path.join(PARENT_PATH, f'input_files/day{DAY}_input.txt')
 
 CRATE_SIZE = 4
 OFFSET = 1
@@ -72,10 +72,12 @@ def execute_part(part: int, stack: List[List[str]]):
 
 
 if __name__ == "__main__":
+    print(f'Advent of Code Day {DAY} https://adventofcode.com/2022/day/{DAY}')
+
     all_input = get_lines(INPUT_FILE_PATH)
     stacks = all_input[:8]
     instruction_lines = all_input[10:]
 
-    for part in (1, 2):
+    for part in PARTS:
         new_stack = cleanup_stacks(stacks)
         execute_part(part, new_stack)

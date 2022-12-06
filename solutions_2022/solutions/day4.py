@@ -1,5 +1,3 @@
-# https://adventofcode.com/2022/day/4
-
 from pathlib import Path
 import os
 from typing import List, Tuple
@@ -7,9 +5,11 @@ from operator import sub
 
 from shared_functions import get_lines
 
+DAY = 4
+PARTS = (1, 2)
 PATH = Path(os.path.abspath(__file__))
 PARENT_PATH = PATH.parent.absolute().parent.absolute()
-INPUT_FILE_PATH = os.path.join(PARENT_PATH, "input_files/day4_input.txt")
+INPUT_FILE_PATH = os.path.join(PARENT_PATH, f'input_files/day{DAY}_input.txt')
 
 
 def _create_int_pair(pair) -> Tuple:
@@ -62,6 +62,8 @@ def get_overlapping_pair_count(lines: List[str]) -> int:
 
 
 if __name__ == "__main__":
+    print(f'Advent of Code Day {DAY} https://adventofcode.com/2022/day/{DAY}')
+
     lines = get_lines(INPUT_FILE_PATH)
     print(f'Day 4, Part 1: {get_encompassing_pair_count(lines)}')
     print(f'Day 4, Part 2: {get_overlapping_pair_count(lines)}')

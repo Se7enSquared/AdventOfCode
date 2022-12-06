@@ -1,17 +1,17 @@
-# https://adventofcode.com/2022/day/3
-
 from pathlib import Path
 import os
 from typing import Dict, List, Tuple
 from string import ascii_lowercase, ascii_uppercase
 from itertools import islice, zip_longest
 
-
 from shared_functions import get_lines
 
+
+DAY = 3
+PARTS = (1, 2)
 PATH = Path(os.path.abspath(__file__))
 PARENT_PATH = PATH.parent.absolute().parent.absolute()
-INPUT_FILE_PATH = os.path.join(PARENT_PATH, 'input_files/day3_input.txt')
+INPUT_FILE_PATH = os.path.join(PARENT_PATH, f'input_files/day{DAY}_input.txt')
 
 
 def generate_priority_dicts(case: str, rng: range) -> Dict[str, str]:
@@ -43,6 +43,8 @@ def grouper(iterable: iter, n: int, fillvalue: str=None) -> Dict:
 
 
 if __name__ == '__main__':
+    print(f'Advent of Code Day {DAY} https://adventofcode.com/2022/day/{DAY}')
+    
     global LOWER_DICT
     global UPPER_DICT
 

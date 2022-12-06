@@ -1,14 +1,16 @@
-# https://adventofcode.com/2022/day/3
-
 from pathlib import Path
 import os
 from typing import List
 
 from shared_functions import get_lines
 
+
+DAY = 1
+PARTS = (1, 2)
 PATH = Path(os.path.abspath(__file__))
 PARENT_PATH = PATH.parent.absolute().parent.absolute()
-INPUT_FILE_PATH = os.path.join(PARENT_PATH, 'input_files/day1_input.txt')
+INPUT_FILE_PATH = os.path.join(PARENT_PATH, f'input_files/day{DAY}_input.txt')
+print(f'Advent of Code Day {DAY} https://adventofcode.com/2022/day/{DAY}')
 
 
 def get_top_3(calories: str) -> List[int]:

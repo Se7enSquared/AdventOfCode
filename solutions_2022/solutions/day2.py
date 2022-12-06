@@ -1,14 +1,16 @@
-#https://adventofcode.com/2022/day/2
-
 from pathlib import Path
 import os
 from typing import List, Tuple
 
 from shared_functions import get_lines
 
+
+DAY = 2
+PARTS = (1, 2)
 PATH = Path(os.path.abspath(__file__))
 PARENT_PATH = PATH.parent.absolute().parent.absolute()
-INPUT_FILE_PATH = os.path.join(PARENT_PATH,  'input_files/day2_input.txt')
+INPUT_FILE_PATH = os.path.join(PARENT_PATH, f'input_files/day{DAY}_input.txt')
+
 
 PLAY_DECODER = {
     "A": "Rock",
@@ -117,5 +119,6 @@ def execute(part: int):
 
 
 if __name__ == '__main__':
-    for part in (1, 2):
+    print(f'Advent of Code Day {DAY} https://adventofcode.com/2022/day/{DAY}')
+    for part in PARTS:
         execute(part)
