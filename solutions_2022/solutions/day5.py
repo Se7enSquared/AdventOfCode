@@ -13,7 +13,7 @@ PARENT_PATH = PATH.parent.absolute().parent.absolute()
 INPUT_FILE_PATH = os.path.join(PARENT_PATH, 'input_files/day5_input.txt')
 
 
-def cleanup_stacks(stack_input):
+def cleanup_stacks(stack_input: List[List[str]]) -> List[List[str]]:
     """ a rather ridiculous way to clean and transpose the stacks """
     new_stack = []
     for line in stack_input:
@@ -24,7 +24,7 @@ def cleanup_stacks(stack_input):
     return [lst[::-1] for lst in clean_stack]
 
 
-def clean_list_items(transposed_stack):
+def clean_list_items(transposed_stack: List[List[str]]) -> List[List[str]]:
     """ remove extraneous characters from list items """
     outer_list = []
     for l in transposed_stack:
@@ -39,7 +39,7 @@ def clean_list_items(transposed_stack):
     return [[x for x in lst if x] for lst in outer_list]
 
 
-def parse_instructions(instruction_line):
+def parse_instructions(instruction_line: str) -> namedtuple:
     """ build a namedtuple of instructions """
     Instruction = namedtuple('Instruction', 'qty move_from move_to')
     quantity = int(instruction_line[1])
@@ -48,7 +48,7 @@ def parse_instructions(instruction_line):
     return Instruction(quantity, move_from, move_to)
 
 
-def follow_instruction(stack: List[List[str]], instruction: namedtuple, part1=True):
+def follow_instruction(stack: List[List[str]], instruction: namedtuple, part1: bool = True) -> List[List[str]]:
     """ perform the actions in the instruction object """
     items = stack[instruction.move_from][-instruction.qty:]
     if part1:
