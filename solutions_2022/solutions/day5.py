@@ -12,12 +12,14 @@ PATH = Path(os.path.abspath(__file__))
 PARENT_PATH = PATH.parent.absolute().parent.absolute()
 INPUT_FILE_PATH = os.path.join(PARENT_PATH, "input_files/day5_input.txt")
 
+CRATE_SIZE = 4
+
 
 def cleanup_stacks(stack_input: List[List[str]]) -> List[List[str]]:
     """a rather ridiculous way to clean and transpose the stacks"""
     new_stack = []
     for line in stack_input:
-        l = [line[i : i + 4] for i in range(0, len(line), 4)]
+        l = [line[i : i + CRATE_SIZE] for i in range(0, len(line), CRATE_SIZE)]
         new_stack.append(l)
     transposed_stack = list(map(list, zip_longest(*new_stack, fillvalue="")))
     clean_stack = clean_list_items(transposed_stack)
