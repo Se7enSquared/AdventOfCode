@@ -47,8 +47,7 @@ def parse_instructions(instruction_line: str) -> namedtuple:
     return Instruction(quantity, move_from, move_to)
 
 
-def follow_instruction(
-    stack: List[List[str]], instruction: namedtuple, part: int) -> List[List[str]]:
+def follow_instruction(stack: List[List[str]], instruction: namedtuple, part: int) -> List[List[str]]:
     """perform the actions in the instruction object"""
     items = stack[instruction.move_from][-instruction.qty :]
     if part == 1:
